@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+data/raw/BatteryDataSet.zip
+data/raw/*.zip
+data/raw/*.mat
+*.log
+.DS_Store
