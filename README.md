@@ -1,13 +1,26 @@
 # Battery Health Prognostics & Remaining Useful Life (RUL) Prediction for Autonomous Underwater Vehicles (AUVs)
 
+[![TIH IIT Guwahati](https://img.shields.io/badge/TIH%20IIT%20Guwahati-Internship%20Phase-00529B.svg)](https://tih.iitg.ac.in)
+[![Track](https://img.shields.io/badge/Track-Group%20O4-blue.svg)]()
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-EE4C2C.svg?style=flat&logo=pytorch)](https://pytorch.org)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB.svg?style=flat&logo=python)](https://python.org)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![NASA Dataset](https://img.shields.io/badge/Dataset-NASA%20PCoE-orange.svg)](https://data.nasa.gov/)
 
 An end-to-end, production-grade deep learning framework for **Battery State of Health (SOH)** estimation and **Remaining Useful Life (RUL)** forecasting under marine mission profiles and dynamic degradation dynamics.
 
-Developed as part of the **TIH IIT Guwahati 4-Week Online Internship Research Project**.
+Developed as part of the **TIH IIT Guwahati 4-Week Online Internship Research Project** (Group O4).
+
+---
+
+## 📌 Week 2 Submission Milestones (Day 1 & Day 2)
+
+| Day / Milestone | Deliverable Document | Key Content |
+| :--- | :--- | :--- |
+| **Week 2 — Day 1** | [Problem Understanding & System Definition](docs/week2_day1_problem_understanding_and_system_definition.md) | Technical problem formulation, mathematical SOH/RUL definitions, end-to-end software pipeline diagram, 8+ mentor review questions, toolchain & success criteria. |
+| **Week 2 — Day 2** | [Data Exploration & Baseline Experiment](docs/week2_day2_data_exploration_and_baseline_experiment.md) | Quality audit of 34 NASA cells (2,744 cycles), leakage-safe cell-wise split, empirical baseline vs Random Forest vs 6 deep learning models, challenges & next steps. |
+| **Mentor Review Pack** | [3-Slide Progress Pack](reports/week2_mentor_review_progress_pack.md) | Slide 1 (Work Completed), Slide 2 (Results & Key Findings), Slide 3 (Blockers & Next 3-Day Plan). |
+| **Interactive Notebook**| [Week 2 Day 1 & Day 2 Notebook](notebooks/week2_day1_day2_submission.ipynb) | Executable Jupyter walkthrough of data inspection, baseline experiments, and benchmark visualization. |
 
 ---
 
@@ -26,14 +39,19 @@ Developed as part of the **TIH IIT Guwahati 4-Week Online Internship Research Pr
 ```tree
 ├── data/
 │   ├── raw/                # 34 NASA .mat battery aging files
-│   └── processed/          # Cleaned cycle-by-cycle tabular CSVs
+│   └── processed/          # Cleaned cycle-by-cycle tabular CSVs (B0005-B0056)
+├── docs/
+│   ├── week2_day1_problem_understanding_and_system_definition.md
+│   └── week2_day2_data_exploration_and_baseline_experiment.md
 ├── experiments/            # Training logs & experiment configurations
 ├── notebooks/
+│   ├── week2_day1_day2_submission.ipynb
 │   ├── 01_exploratory_data_analysis.ipynb
 │   ├── 02_model_training_and_benchmarking.ipynb
 │   └── 03_robustness_and_cross_cell_evaluation.ipynb
 ├── reports/
-│   └── final_research_report.md  # Comprehensive technical research report
+│   ├── week2_mentor_review_progress_pack.md  # 3-Slide Mentor Review Pack
+│   └── final_research_report.md             # Comprehensive research report
 ├── results/
 │   ├── figures/            # High-resolution publication-quality plots (300 DPI)
 │   └── metrics/            # CSV and Markdown benchmark comparison tables
@@ -57,7 +75,7 @@ Developed as part of the **TIH IIT Guwahati 4-Week Online Internship Research Pr
 
 ### 1. Environment Setup
 ```bash
-git clone https://github.com/<your-username>/battery-health-rul-deep-learning.git
+git clone https://github.com/givemehat/battery-health-rul-deep-learning.git
 cd battery-health-rul-deep-learning
 
 # Create virtual environment
@@ -86,16 +104,16 @@ python train_and_benchmark.py
 
 Evaluated on unseen test battery cell **NASA B0018** (Trained on `B0005`, `B0006`; Validated on `B0007`):
 
-| Model | MAE (Cycles) | RMSE (Cycles) | MAPE (%) | $R^2$ Score | Max Error | Params | Inference Latency |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Proposed Hybrid SOTA (CEEMDAN-TCN-BiLSTM-DualAttention)** | **3.12** | **4.25** | **4.8%** | **0.982** | **8.4** | **172k** | **1.2 ms** |
-| BiLSTM + Multi-Head Attention | 4.45 | 5.89 | 6.2% | 0.965 | 11.2 | 108k | 0.9 ms |
-| Temporal Transformer | 4.88 | 6.32 | 7.1% | 0.954 | 12.8 | 134k | 1.1 ms |
-| Temporal Convolutional Network (TCN) | 5.21 | 6.94 | 7.9% | 0.941 | 14.5 | 107k | 0.7 ms |
-| Gated Recurrent Unit (GRU) | 6.15 | 8.12 | 9.4% | 0.918 | 16.9 | 39k | 0.6 ms |
-| Standard LSTM | 6.84 | 8.95 | 10.8% | 0.897 | 18.3 | 52k | 0.6 ms |
-| Random Forest Regressor | 8.35 | 10.74 | 13.5% | 0.842 | 22.1 | ~50k | 0.05 ms |
-| Empirical Double-Exp Baseline | 12.60 | 15.42 | 19.8% | 0.685 | 31.0 | 4 | 0.01 ms |
+| Model Architecture | MAE (Cycles) | RMSE (Cycles) | MAPE (%) | $R^2$ Score | Max Error | Params | Train Time (s) | Inference Latency |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Temporal Convolutional Network (TCN)** | **5.050** | **6.049** | **41.27%** | **0.952** | **13.08** | **107,554** | **5.20s** | **1.54 ms** |
+| **Random Forest Regressor** | **7.100** | **7.947** | **43.62%** | **0.916** | **18.21** | 50,000 | 0.36s | 0.05 ms |
+| **Proposed Hybrid SOTA (CEEMDAN-TCN-BiLSTM-DualAttn)** | 14.397 | 15.809 | 109.87% | 0.669 | 22.05 | 293,090 | 4.96s | 0.28 ms |
+| **Temporal Transformer** | 14.507 | 16.041 | 115.68% | 0.659 | 23.32 | 67,714 | 11.39s | 1.44 ms |
+| **Empirical Double-Exp Baseline** | 17.432 | 19.196 | 133.88% | 0.512 | 22.00 | 4 | 0.01s | 0.10 ms |
+| **BiLSTM-Attention** | 17.536 | 20.209 | 142.11% | 0.459 | 30.94 | 220,674 | 9.41s | 1.35 ms |
+| **Standard LSTM** | 20.637 | 22.721 | 158.05% | 0.316 | 31.41 | 52,610 | 11.30s | 1.12 ms |
+| **Standard GRU** | 21.666 | 23.597 | 159.93% | 0.262 | 32.30 | 39,490 | 22.64s | 0.35 ms |
 
 ---
 
