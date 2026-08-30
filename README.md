@@ -4,7 +4,7 @@
 [![Track](https://img.shields.io/badge/Track-Group%20O4-blue.svg)]()
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-EE4C2C.svg?style=flat&logo=pytorch)](https://pytorch.org)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB.svg?style=flat&logo=python)](https://python.org)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![NASA Dataset](https://img.shields.io/badge/Dataset-NASA%20PCoE-orange.svg)](https://data.nasa.gov/)
 
 An end-to-end, production-grade deep learning framework for **Battery State of Health (SOH)** estimation and **Remaining Useful Life (RUL)** forecasting under marine mission profiles and dynamic degradation dynamics.
@@ -13,14 +13,17 @@ Developed as part of the **TIH IIT Guwahati 4-Week Online Internship Research Pr
 
 ---
 
-## 📌 Week 2 Submission Milestones (Day 1 & Day 2)
+## 📌 Submission Milestones & Review Deliverables
 
-| Day / Milestone | Deliverable Document | Key Content |
+| Milestone / Stage | Deliverable Document | Key Content & Inclusions |
 | :--- | :--- | :--- |
-| **Week 2 — Day 1** | [Problem Understanding & System Definition](docs/week2_day1_problem_understanding_and_system_definition.md) | Technical problem formulation, mathematical SOH/RUL definitions, end-to-end software pipeline diagram, 8+ mentor review questions, toolchain & success criteria. |
-| **Week 2 — Day 2** | [Data Exploration & Baseline Experiment](docs/week2_day2_data_exploration_and_baseline_experiment.md) | Quality audit of 34 NASA cells (2,744 cycles), leakage-safe cell-wise split, empirical baseline vs Random Forest vs 6 deep learning models, challenges & next steps. |
-| **Mentor Review Pack** | [3-Slide Progress Pack](reports/week2_mentor_review_progress_pack.md) | Slide 1 (Work Completed), Slide 2 (Results & Key Findings), Slide 3 (Blockers & Next 3-Day Plan). |
-| **Interactive Notebook**| [Week 2 Day 1 & Day 2 Notebook](notebooks/week2_day1_day2_submission.ipynb) | Executable Jupyter walkthrough of data inspection, baseline experiments, and benchmark visualization. |
+| **Pre-Dataset Readiness & Mentor Review (Day 6)** | [Methodology Document V1](docs/methodology_v1.md) | **Methodology V1**: Mathematical SOH & RUL definitions, literature review (*Qiu et al., 2024*, *Ma et al., 2025*), data-readiness package (34 NASA cells), CEEMDAN decomposition, 8-model architecture zoo, and multi-task loss ($\mathcal{L}_{\text{RUL}} + 10.0 \cdot \mathcal{L}_{\text{cap}}$). |
+| **Mentor Decision & Corrections Log** | [Mentor Review Corrections](reports/mentor_review_corrections.md) | **Mentor Corrections**: Confirmed EOL failure thresholds ($1.40\text{ Ah}$ for B0005/6/18, $1.50\text{ Ah}$ for B0007), strict cell-wise zero-leakage split, out-of-sample scaling, capacity regeneration modeling, and AUV embedded edge constraints. |
+| **Updated Experiment Plan** | [Updated Experiment Plan](experiments/updated_experiment_plan.md) | **Experiment Plan V1**: 8-model comparison matrix, hyperparameter search grids, AdamW optimizer schedule, sequence length ($L=15$) ablation plan, and cross-cell generalization folds. |
+| **Mentor Review Presentation** | [3-Slide Review Pack](reports/mentor_review_2_presentation_pack.md) | **Mentor Review 2 Pack**: Slide 1 (Pre-Dataset Readiness), Slide 2 (Preprocessing, Modeling & Evaluation Plan), Slide 3 (Mentor Corrections & Validated Constraints). |
+| **Week 2 — Day 1** | [Problem Understanding](docs/week2_day1_problem_understanding_and_system_definition.md) | Technical problem formulation, mathematical SOH/RUL definitions, end-to-end software pipeline diagram, and 8+ mentor review questions. |
+| **Week 2 — Day 2** | [Data Exploration & Baseline](docs/week2_day2_data_exploration_and_baseline_experiment.md) | Quality audit of 34 NASA cells (2,744 cycles), leakage-safe split, empirical baseline vs Random Forest vs 6 deep learning models, challenges & findings. |
+| **Interactive Submission Notebook** | [Week 2 Submission Notebook](notebooks/week2_day1_day2_submission.ipynb) | Executable Jupyter walkthrough of data inspection, baseline experiments, and benchmark visualization. |
 
 ---
 
@@ -41,17 +44,23 @@ Developed as part of the **TIH IIT Guwahati 4-Week Online Internship Research Pr
 │   ├── raw/                # 34 NASA .mat battery aging files
 │   └── processed/          # Cleaned cycle-by-cycle tabular CSVs (B0005-B0056)
 ├── docs/
+│   ├── methodology_v1.md   # Comprehensive Methodology V1 (Approved)
+│   ├── mentor_review_corrections.md # Mentor feedback and decision log
 │   ├── week2_day1_problem_understanding_and_system_definition.md
 │   └── week2_day2_data_exploration_and_baseline_experiment.md
-├── experiments/            # Training logs & experiment configurations
+├── experiments/
+│   ├── updated_experiment_plan.md   # Detailed experiment matrix & ablation plans
+│   └── training.log        # Hardware execution & training logs
 ├── notebooks/
 │   ├── week2_day1_day2_submission.ipynb
 │   ├── 01_exploratory_data_analysis.ipynb
 │   ├── 02_model_training_and_benchmarking.ipynb
 │   └── 03_robustness_and_cross_cell_evaluation.ipynb
 ├── reports/
-│   ├── week2_mentor_review_progress_pack.md  # 3-Slide Mentor Review Pack
-│   └── final_research_report.md             # Comprehensive research report
+│   ├── mentor_review_2_presentation_pack.md  # 3-Slide Mentor Review 2 Pack
+│   ├── mentor_review_corrections.md          # Itemized feedback traceability table
+│   ├── week2_mentor_review_progress_pack.md  # Week 2 Day 1-2 Progress Pack
+│   └── final_research_report.md              # Comprehensive research report
 ├── results/
 │   ├── figures/            # High-resolution publication-quality plots (300 DPI)
 │   └── metrics/            # CSV and Markdown benchmark comparison tables
